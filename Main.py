@@ -1,9 +1,6 @@
 import streamlit as st
 
 
-
-
-
 st.set_page_config(
     page_title = "Budget Calculator"
 )
@@ -47,7 +44,6 @@ def trackExpenses():
             st.success("Saved")     
     
 
-    # fix how its not continously updating 
 
 
 def display():
@@ -63,6 +59,5 @@ def display():
 
 display()
 
-#implenent multip page elements if you want 
 
 
