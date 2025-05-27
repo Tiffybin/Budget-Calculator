@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd 
-import matplotlib.pyplot as plt 
+
 
 
 st.title("Charts")
@@ -12,8 +12,6 @@ def graphics():
 
     table = st.table(data)
 
-
-    plt.show()
 
     st.bar_chart(data.set_index("Category"), x_label="Category", y_label="Dollar Amount" )
 
