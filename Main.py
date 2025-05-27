@@ -1,9 +1,14 @@
 import streamlit as st
-import pandas as pd 
-import matplotlib.pyplot as plt 
 
 
-st.write("Budget Calculator")
+
+
+
+st.set_page_config(
+    page_title = "Budget Calculator"
+)
+st.title("Main Page")
+st.sidebar.success("Select a page")
 
 
 if 'income' not in st.session_state: 
@@ -35,7 +40,7 @@ def trackExpenses():
         # time = st.date_input("Time of purchase", max_value = "today")
         exp = st.number_input("Enter your expense:", min_value = 0, step = 1, value = st.session_state.expenses[cat] )
 
-        st.session_state.expenses[cat] = exp
+        st.session_state.expenses[cat] += exp 
 
         submitted = st.form_submit_button("Submit") 
         if submitted: 
@@ -52,22 +57,8 @@ def display():
     sumExpenses = sum(st.session_state.expenses.values())
  
     st.write("Total Expenses:", sumExpenses)
-    graphics()
 
 
-
-def graphics():
-    expenses = st.session_state.expenses
-   
-    data = pd.DataFrame({"Category": list(expenses.keys()), "Amount": list(expenses.values())})
-
-    table = st.table(data)
-
-    plt.pie( expenses.values(), labels = expenses.keys())
-
-    plt.show()
-
-    st.bar_chart(data.set_index("Category"), x_label="Category", y_label="Dollar Amount" )
 
 
 display()
