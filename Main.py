@@ -1,9 +1,5 @@
 import streamlit as st
 
-#add color to chart
-# add format stuff
-# add colors to radios
-
 
 st.set_page_config(
     page_title = "Budget Calculator"
