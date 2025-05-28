@@ -20,6 +20,14 @@ if 'expenses' not in st.session_state:
     "Food": 0, "Entertainment": 0, 
     "Subscriptions": 0, "Other": 0}
 
+if "expense_amount" not in st.session_state:
+    st.session_state.expense_amount = 0
+
+
+
+
+
+
 def trackBudget():
     budget_form = st.form(key = "budget_key", clear_on_submit = True, border= True)
     with budget_form: 
@@ -45,18 +53,18 @@ def trackExpenses():
         cat = st.radio("Select a category:", list(st.session_state.expenses.keys()), index =0)
        
         # time = st.date_input("Time of purchase", max_value = "today")
-        exp = st.number_input("Enter your expense:", min_value = 0, step = 1, value = st.session_state.expenses[cat] )
-
-        st.session_state.expenses[cat] += exp 
+        exp = st.number_input("Enter your expense:", min_value = 0, step = 1, key="expense_amount" )
 
         submitted = st.form_submit_button("Submit") 
         if submitted: 
-            st.success("Saved")     
-    
+            st.success("Saved")  
+            st.session_state.expenses[cat] += exp
+            st.success(f"Added ${exp} to {cat}")
+        
 
 def displayBalance():
     st.write("Budget:", st.session_state.budget)
-    # add checkmark
+
     st.write("Total Income:", st.session_state.income)
     st.divider()
 
@@ -64,7 +72,6 @@ def display():
     trackBudget()
     trackIncome()
     trackExpenses()
-
 
     sumExpenses = sum(st.session_state.expenses.values())
  
